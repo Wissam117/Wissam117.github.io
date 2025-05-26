@@ -126,6 +126,32 @@
             position: relative;
             z-index: 2;
             animation: fadeInUp 1s ease-out;
+            display: flex;
+            align-items: center;
+            gap: 3rem;
+        }
+
+        .hero-text {
+            flex: 1;
+        }
+
+        .hero-image {
+            flex-shrink: 0;
+        }
+
+        .profile-image {
+            width: 300px;
+            height: 300px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary);
+            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .profile-image:hover {
+            transform: scale(1.05);
+            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
         }
 
         @keyframes fadeInUp {
@@ -401,6 +427,17 @@
                 display: none;
             }
 
+            .hero-content {
+                flex-direction: column-reverse;
+                text-align: center;
+                gap: 2rem;
+            }
+
+            .profile-image {
+                width: 200px;
+                height: 200px;
+            }
+
             .about-content {
                 grid-template-columns: 1fr;
                 gap: 2rem;
@@ -469,18 +506,23 @@
         <div class="hero-bg"></div>
         <div class="container">
             <div class="hero-content">
-                <h1>Hi, I'm Muhammad Wissam</h1>
-                <p class="subtitle">Full Stack Software Engineer | AI/ML Engineer</p>
-                <p>Computer Science student at FAST NUCES with a passion for Artificial Intelligence and Software Development. I create innovative solutions that push the boundaries of technology, specializing in web applications, machine learning, and cloud computing.</p>
-                <div class="cta-buttons">
-                    <a href="#projects" class="btn btn-primary">
-                        <i class="fas fa-code"></i>
-                        View My Work
-                    </a>
-                    <a href="#contact" class="btn btn-secondary">
-                        <i class="fas fa-envelope"></i>
-                        Get In Touch
-                    </a>
+                <div class="hero-text">
+                    <h1>Hi, I'm Muhammad Wissam</h1>
+                    <p class="subtitle">Full Stack Software Engineer | AI/ML Engineer</p>
+                    <p>Computer Science student at FAST NUCES with a passion for Artificial Intelligence and Software Development. I create innovative solutions that push the boundaries of technology, specializing in web applications, machine learning, and cloud computing.</p>
+                    <div class="cta-buttons">
+                        <a href="#projects" class="btn btn-primary">
+                            <i class="fas fa-code"></i>
+                            View My Work
+                        </a>
+                        <a href="#contact" class="btn btn-secondary">
+                            <i class="fas fa-envelope"></i>
+                            Get In Touch
+                        </a>
+                    </div>
+                </div>
+                <div class="hero-image">
+                    <img src="pfp.png" alt="Muhammad Wissam" class="profile-image">
                 </div>
             </div>
         </div>
