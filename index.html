@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -121,8 +122,15 @@
         }
 
         @keyframes pulse {
-            0%, 100% { opacity: 0.5; }
-            50% { opacity: 1; }
+
+            0%,
+            100% {
+                opacity: 0.5;
+            }
+
+            50% {
+                opacity: 1;
+            }
         }
 
         .hero-content {
@@ -162,6 +170,7 @@
                 opacity: 0;
                 transform: translateY(30px);
             }
+
             to {
                 opacity: 1;
                 transform: translateY(0);
@@ -488,8 +497,10 @@
         }
     </style>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
 </head>
+
 <body>
     <!-- Navigation -->
     <nav>
@@ -512,7 +523,9 @@
                 <div class="hero-text">
                     <h1>Hi, I'm Muhammad Wissam</h1>
                     <p class="subtitle">Full Stack Software Engineer | AI/ML Engineer</p>
-                    <p>Computer Science student at FAST NUCES with a passion for Artificial Intelligence and Software Development. I create innovative solutions that push the boundaries of technology, specializing in web applications, machine learning, and cloud computing.</p>
+                    <p>Computer Science student at FAST NUCES with a passion for Artificial Intelligence and Software
+                        Development. I create innovative solutions that push the boundaries of technology, specializing
+                        in web applications, machine learning, and cloud computing.</p>
                     <div class="cta-buttons">
                         <a href="#projects" class="btn btn-primary">
                             <i class="fas fa-code"></i>
@@ -521,6 +534,10 @@
                         <a href="#contact" class="btn btn-secondary">
                             <i class="fas fa-envelope"></i>
                             Get In Touch
+                        </a>
+                        <a href="https://github.com/Wissam117" class="btn btn-secondary" target="_blank">
+                            <i class="fab fa-github"></i>
+                            GitHub
                         </a>
                     </div>
                 </div>
@@ -540,11 +557,18 @@
             </div>
             <div class="about-content">
                 <div class="about-text">
-                    <p>I'm a passionate computer science student at FAST National University with expertise in full-stack development and AI/ML engineering. Currently pursuing my BS in Computer Science (graduating June 2025), I've developed strong problem-solving skills and effective communication abilities.</p>
-                    
-                    <p>My experience spans from building vegetation monitoring systems and home automation solutions to developing deep learning models for video generation and image super-resolution. I've also gained valuable industry experience as a Cybersecurity Intern at LMKR, where I deployed intrusion detection and network monitoring systems.</p>
-                    
-                    <p>I'm always eager to take on new challenges and demonstrate creativity to push the boundaries of technology. Let's collaborate to bring innovative ideas to life!</p>
+                    <p>I'm a passionate computer science student at FAST National University with expertise in
+                        full-stack development and AI/ML engineering. Currently pursuing my BS in Computer Science
+                        (graduating June 2025), I've developed strong problem-solving skills and effective communication
+                        abilities.</p>
+
+                    <p>My experience spans from building vegetation monitoring systems and home automation solutions to
+                        developing deep learning models for video generation and image super-resolution. I've also
+                        gained valuable industry experience as a Cybersecurity Intern at LMKR, where I deployed
+                        intrusion detection and network monitoring systems.</p>
+
+                    <p>I'm always eager to take on new challenges and demonstrate creativity to push the boundaries of
+                        technology. Let's collaborate to bring innovative ideas to life!</p>
                 </div>
                 <div class="skills-grid">
                     <div class="skill-item">
@@ -598,7 +622,9 @@
                     </div>
                     <div class="project-content">
                         <h3>TreeVerse - Vegetation Monitoring System (Final Year Project)</h3>
-                        <p>Collaborated a comprehensive vegetation monitoring web application using satellite imagery and geospatial data. Users can monitor deforestation and analyze vegetation across 4 categories: crops, bushes, trees, and barren land.</p>
+                        <p>Collaborated a comprehensive vegetation monitoring web application using satellite imagery
+                            and geospatial data. Users can monitor deforestation and analyze vegetation across 4
+                            categories: crops, bushes, trees, and barren land.</p>
                         <div class="project-tech">
                             <span class="tech-tag">Django REST</span>
                             <span class="tech-tag">React</span>
@@ -619,7 +645,8 @@
                     </div>
                     <div class="project-content">
                         <h3>HOMEE - Home Automation System</h3>
-                        <p>Full-stack home automation system that monitors electricity usage and automates IoT devices, making operations 3x more efficient with an intuitive JavaFX interface.</p>
+                        <p>Full-stack home automation system that monitors electricity usage and automates IoT devices,
+                            making operations 3x more efficient with an intuitive JavaFX interface.</p>
                         <div class="project-tech">
                             <span class="tech-tag">Java</span>
                             <span class="tech-tag">JavaFX</span>
@@ -640,7 +667,9 @@
                     </div>
                     <div class="project-content">
                         <h3>Video Generator - AI Video Prediction</h3>
-                        <p>Deep learning application made using Flask that generates videos by predicting the next 5 frames using previous 10 frames with Vision Transformer architecture and other trained models.</p>
+                        <p>Deep learning application made using Flask that generates videos by predicting the next 5
+                            frames using previous 10 frames with Vision Transformer architecture and other trained
+                            models.</p>
                         <div class="project-tech">
                             <span class="tech-tag">Flask</span>
                             <span class="tech-tag">Vision Transformer</span>
@@ -648,7 +677,8 @@
                             <span class="tech-tag">Python</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Wissam117/VideoGenerator-AIVideoPrediction" class="project-link" target="_blank">
+                            <a href="https://github.com/Wissam117/VideoGenerator-AIVideoPrediction" class="project-link"
+                                target="_blank">
                                 <i class="fab fa-github"></i> Source Code
                             </a>
                         </div>
@@ -661,7 +691,8 @@
                     </div>
                     <div class="project-content">
                         <h3>Cloud Web Application Builder</h3>
-                        <p>Secure, highly available web application deployed on Amazon EC2 with load balancing, utilizing serverless architecture and AWS best practices.</p>
+                        <p>Secure, highly available web application deployed on Amazon EC2 with load balancing,
+                            utilizing serverless architecture and AWS best practices.</p>
                         <div class="project-tech">
                             <span class="tech-tag">AWS EC2</span>
                             <span class="tech-tag">AWS Lambda</span>
@@ -669,7 +700,8 @@
                             <span class="tech-tag">DynamoDB</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://www.credly.com/badges/1779320a-c6e7-499b-8098-ee170bacd4d8/public_url" class="project-link" target="_blank">
+                            <a href="https://www.credly.com/badges/1779320a-c6e7-499b-8098-ee170bacd4d8/public_url"
+                                class="project-link" target="_blank">
                                 <i class="fab fa-credly"></i> Credly Badge
                             </a>
                         </div>
@@ -682,7 +714,9 @@
                     </div>
                     <div class="project-content">
                         <h3>FLEX - University Management System</h3>
-                        <p>Collaborated on a comprehensive university management web application that makes administration tasks like attendance and grading 200% faster with an intuitive interface.</p>
+                        <p>Collaborated on a comprehensive university management web application that makes
+                            administration tasks like attendance and grading 200% faster with an intuitive interface.
+                        </p>
                         <div class="project-tech">
                             <span class="tech-tag">ASP.NET MVC</span>
                             <span class="tech-tag">MS SQL</span>
@@ -703,7 +737,8 @@
                     </div>
                     <div class="project-content">
                         <h3>PixelFocus - Image Super Resolution</h3>
-                        <p>Advanced image super-resolution application using hybrid ResNet-U-Net-ESPCN model to upscale images, achieving 2x image enhancement with high quality results.</p>
+                        <p>Advanced image super-resolution application using hybrid ResNet-U-Net-ESPCN model to upscale
+                            images, achieving 2x image enhancement with high quality results.</p>
                         <div class="project-tech">
                             <span class="tech-tag">TensorFlow</span>
                             <span class="tech-tag">PyTorch</span>
@@ -711,7 +746,8 @@
                             <span class="tech-tag">Computer Vision</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Wissam117/PixelFocus-ImageSuperResolution" class="project-link" target="_blank">
+                            <a href="https://github.com/Wissam117/PixelFocus-ImageSuperResolution" class="project-link"
+                                target="_blank">
                                 <i class="fab fa-github"></i> Source Code
                             </a>
                         </div>
@@ -729,7 +765,9 @@
                 <p>I'm always open to discussing new opportunities and interesting projects</p>
             </div>
             <div class="contact-content">
-                <p>Whether you have a project in mind, want to collaborate, or just want to say hello, I'd love to hear from you. As a graduating CS student eager to contribute to innovative projects, let's create something amazing together!</p>
+                <p>Whether you have a project in mind, want to collaborate, or just want to say hello, I'd love to hear
+                    from you. As a graduating CS student eager to contribute to innovative projects, let's create
+                    something amazing together!</p>
                 <div class="contact-links">
                     <a href="mailto:mwissam11@gmail.com" class="contact-link">
                         <i class="fas fa-envelope"></i>
@@ -809,14 +847,15 @@
 
         // Add some interactive hover effects
         document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
+            card.addEventListener('mouseenter', function () {
                 this.style.boxShadow = '0 20px 40px rgba(99, 102, 241, 0.2)';
             });
-            
-            card.addEventListener('mouseleave', function() {
+
+            card.addEventListener('mouseleave', function () {
                 this.style.boxShadow = 'none';
             });
         });
     </script>
 </body>
+
 </html>
