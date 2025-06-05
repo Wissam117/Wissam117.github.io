@@ -317,6 +317,12 @@
             gap: 2rem;
         }
 
+        .project-card.last-project {
+            grid-column: 1 / -1;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+
         .project-card {
             background: var(--bg-card);
             border-radius: 1rem;
@@ -687,22 +693,22 @@
 
                 <div class="project-card">
                     <div class="project-image">
-                        <i class="fas fa-cloud"></i>
+                        <i class="fas fa-image"></i>
                     </div>
                     <div class="project-content">
-                        <h3>Cloud Web Application Builder</h3>
-                        <p>Secure, highly available web application deployed on Amazon EC2 with load balancing,
-                            utilizing serverless architecture and AWS best practices.</p>
+                        <h3>PixelFocus - Image Super Resolution</h3>
+                        <p>Advanced image super-resolution application using hybrid ResNet-U-Net-ESPCN model to upscale
+                            images, achieving 2x image enhancement with high quality results.</p>
                         <div class="project-tech">
-                            <span class="tech-tag">AWS EC2</span>
-                            <span class="tech-tag">AWS Lambda</span>
-                            <span class="tech-tag">API Gateway</span>
-                            <span class="tech-tag">DynamoDB</span>
+                            <span class="tech-tag">TensorFlow</span>
+                            <span class="tech-tag">PyTorch</span>
+                            <span class="tech-tag">ResNet</span>
+                            <span class="tech-tag">Computer Vision</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://www.credly.com/badges/1779320a-c6e7-499b-8098-ee170bacd4d8/public_url"
-                                class="project-link" target="_blank">
-                                <i class="fab fa-credly"></i> Credly Badge
+                            <a href="https://github.com/Wissam117/PixelFocus-ImageSuperResolution" class="project-link"
+                                target="_blank">
+                                <i class="fab fa-github"></i> Source Code
                             </a>
                         </div>
                     </div>
@@ -753,24 +759,24 @@
                     </div>
                 </div>
 
-                <div class="project-card">
+                <div class="project-card last-project">
                     <div class="project-image">
-                        <i class="fas fa-image"></i>
+                        <i class="fas fa-cloud"></i>
                     </div>
                     <div class="project-content">
-                        <h3>PixelFocus - Image Super Resolution</h3>
-                        <p>Advanced image super-resolution application using hybrid ResNet-U-Net-ESPCN model to upscale
-                            images, achieving 2x image enhancement with high quality results.</p>
+                        <h3>Cloud Web Application Builder</h3>
+                        <p>Secure, highly available web application deployed on Amazon EC2 with load balancing,
+                            utilizing serverless architecture and AWS best practices.</p>
                         <div class="project-tech">
-                            <span class="tech-tag">TensorFlow</span>
-                            <span class="tech-tag">PyTorch</span>
-                            <span class="tech-tag">ResNet</span>
-                            <span class="tech-tag">Computer Vision</span>
+                            <span class="tech-tag">AWS EC2</span>
+                            <span class="tech-tag">AWS Lambda</span>
+                            <span class="tech-tag">API Gateway</span>
+                            <span class="tech-tag">DynamoDB</span>
                         </div>
                         <div class="project-links">
-                            <a href="https://github.com/Wissam117/PixelFocus-ImageSuperResolution" class="project-link"
-                                target="_blank">
-                                <i class="fab fa-github"></i> Source Code
+                            <a href="https://www.credly.com/badges/1779320a-c6e7-499b-8098-ee170bacd4d8/public_url"
+                                class="project-link" target="_blank">
+                                <i class="fab fa-credly"></i> Credly Badge
                             </a>
                         </div>
                     </div>
