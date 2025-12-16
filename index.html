@@ -64,7 +64,17 @@
         .logo {
             font-size: 1.5rem;
             font-weight: 700;
-            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+        }
+
+        .logo:hover {
+            letter-spacing: 1px;
+            filter: brightness(1.2);
         }
 
         .nav-links {
@@ -165,7 +175,48 @@
             font-size: clamp(2.5rem, 5vw, 4rem);
             font-weight: 800;
             margin-bottom: 1rem;
-            color: var(--text-primary);
+            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary) 50%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+            animation: gradientShift 8s ease infinite;
+            background-size: 200% auto;
+        }
+
+        @keyframes gradientShift {
+            0%, 100% {
+                background-position: 0% center;
+            }
+            50% {
+                background-position: 100% center;
+            }
+        }
+
+        .name-highlight {
+            position: relative;
+            display: inline-block;
+            font-weight: 900;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--secondary) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            background-size: 200% auto;
+            animation: gradientShift 8s ease infinite;
+            filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.3));
+        }
+
+        .name-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+            border-radius: 2px;
+            opacity: 0.6;
         }
 
         .hero .subtitle {
@@ -520,7 +571,7 @@
         <div class="container">
             <div class="hero-content">
                 <div class="hero-text">
-                    <h1>Hi, I'm Muhammad Wissam</h1>
+                    <h1>Hi, I'm <span class="name-highlight">Muhammad Wissam</span></h1>
                     <p class="subtitle">Full Stack Software Engineer | AI/ML Engineer</p>
                     <p>Computer Science student at FAST NUCES with a passion for Artificial Intelligence and Software
                         Development. I create innovative solutions that push the boundaries of technology, specializing
