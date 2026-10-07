@@ -158,3 +158,22 @@ function tickClock() {
 tickClock();
 setInterval(tickClock, 15000);
 $("#year").textContent = new Date().getFullYear();
+
+// ---- Lean by position: left half leans left, right half leans right, centre stands upright ----
+const LEANERS = ".tag, .hero-hi, .sticker, .cert-badge, .chips span, .thumb-art, .xp-item, .pr-ico";
+function applyLean() {
+  const w = innerWidth;
+  $$(LEANERS).forEach(el => {
+    if (el.closest(".menu")) return;
+    const r = el.getBoundingClientRect();
+    if (!r.width) return;
+    const cx = (r.left + r.right) / 2 / w;
+    const dir = cx < 0.42 ? -1 : cx > 0.58 ? 1 : 0;
+    el.style.setProperty("--dir", dir);
+    el.classList.toggle("is-center", dir === 0 && (el.matches(".tag, .hero-hi")));
+  });
+}
+let leanTimer;
+addEventListener("resize", () => { clearTimeout(leanTimer); leanTimer = setTimeout(applyLean, 150); });
+document.fonts.ready.then(applyLean);
+applyLean();
