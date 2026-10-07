@@ -296,7 +296,7 @@ section { position: relative; padding: 120px 24px; text-align: center; }
 .proc-body h3 { font-family: var(--display); font-weight: 600; font-size: clamp(48px, 6vw, 72px); margin: 0 0 10px; line-height: 1; }
 .proc-body p { max-width: 400px; margin: 0; }
 .proc-body.swap { animation: swapIn .6s ease-out; transform-origin: 50% 0; }
-@keyframes swapIn { 0% { transform: scale(1, 0); } 55% { transform: scale(.98, 1.06); } 78% { transform: scale(1.01, .98); } 100% { transform: none; } }
+@keyframes swapIn { 0% { transform: scale(1, .94); } 60% { transform: scale(1, 1.01); } 100% { transform: none; } }
 .proc-bar { height: 4px; background: rgba(19, 32, 46, .1); border-radius: 4px; margin-top: 30px; max-width: 400px; overflow: hidden; }
 .proc-bar i { display: block; height: 100%; width: 0; background: var(--ink); }
 .proc-right { position: relative; aspect-ratio: 1; display: grid; place-items: center; }
@@ -304,7 +304,7 @@ section { position: relative; padding: 120px 24px; text-align: center; }
 .burst polygon { fill: var(--stone); }
 .proc-ico { position: relative; width: 46%; }
 .proc-ico svg { width: 100%; fill: none; stroke: var(--ink); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; animation: pop .7s var(--bounce); }
-@keyframes pop { 0% { transform: scale(0) rotate(-30deg); } 60% { transform: scale(1.15, .9) rotate(6deg); } 80% { transform: scale(.95, 1.05) rotate(-2deg); } }
+@keyframes pop { 0% { transform: scale(.9) rotate(-6deg); } 60% { transform: scale(1.03) rotate(1deg); } }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ---------- Versus ---------- */
@@ -473,17 +473,17 @@ section { position: relative; padding: 120px 24px; text-align: center; }
 /* ---------- Centred labels & titles: upright, larger, animated ---------- */
 .tag.is-center { font-size: 17px; padding: 7px 18px; }
 .tag.is-center:hover { transform: scale(1.1); }
-@keyframes tagPop { 0% { scale: 0 .4; } 40% { scale: 1.25 .8; } 60% { scale: .88 1.12; } 80% { scale: 1.05 .96; } 100% { scale: 1; } }
+@keyframes tagPop { 0% { scale: 1.06 .92; } 55% { scale: .98 1.02; } 100% { scale: 1; } }
 @keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5px; } }
 
 /* ---------- Hover sway: lean right, then left, continuously (tada-style, slower) ---------- */
 @keyframes sway { 25% { rotate: var(--sway, 5deg); } 75% { rotate: calc(var(--sway, 5deg) * -1); } }
 .swaying { animation: sway 12s ease-in-out infinite; }
 /* Tags pop in when scrolled into view; hover appends sway after the existing animations so the pop never replays */
-.tag.in, .hero-hi.in { animation: tagPop .9s ease-out both; }
-.tag.in.is-center, .hero-hi.in.is-center { animation: tagPop .9s ease-out both, bob 3.6s ease-in-out 1s infinite; }
-.tag.in.swaying, .hero-hi.in.swaying { animation: tagPop .9s ease-out both, sway 12s ease-in-out infinite; }
-.tag.in.is-center.swaying, .hero-hi.in.is-center.swaying { animation: tagPop .9s ease-out both, bob 3.6s ease-in-out 1s infinite, sway 12s ease-in-out infinite; }
+.tag.in, .hero-hi.in { animation: tagPop .5s ease-out both; }
+.tag.in.is-center, .hero-hi.in.is-center { animation: tagPop .5s ease-out both, bob 3.6s ease-in-out 1s infinite; }
+.tag.in.swaying, .hero-hi.in.swaying { animation: tagPop .5s ease-out both, sway 12s ease-in-out infinite; }
+.tag.in.is-center.swaying, .hero-hi.in.is-center.swaying { animation: tagPop .5s ease-out both, bob 3.6s ease-in-out 1s infinite, sway 12s ease-in-out infinite; }
 .tile.swaying { animation: wave 3.2s ease-in-out infinite, sway 12s ease-in-out infinite; }
 .btn, .menu-pill, .proc-tabs button, .xp-num, .xp-date { --sway: 4deg; }
 .portrait, .thumb-art, .pr-ico { --sway: 3deg; }
@@ -493,44 +493,38 @@ section { position: relative; padding: 120px 24px; text-align: center; }
 @media (prefers-reduced-motion: no-preference) {
   .reveal:not(.in), .tag:not(.in), .hero-hi:not(.in) { visibility: hidden; }
 }
-.reveal.in:not(.done)[data-fx="squeeze"] { animation: fx-squeeze 1s ease-out both; transform-origin: 50% 100%; }
-.reveal.in:not(.done)[data-fx="rubber"] { animation: fx-rubber .9s ease-out both; }
-.reveal.in:not(.done)[data-fx="wipe"] { animation: fx-wipe .8s cubic-bezier(.2, .8, .2, 1) both; }
-.reveal.in:not(.done)[data-fx="flip"] { animation: fx-flip 1s ease-out both; transform-origin: 50% 0; }
-.reveal.in:not(.done)[data-fx="stretch"] { animation: fx-stretch .9s ease-out both; transform-origin: var(--origin, 50% 50%); }
-/* Headings: squash up from the baseline, then wobble into shape */
+.reveal.in:not(.done)[data-fx="squeeze"] { animation: fx-squeeze .6s ease-out both; transform-origin: 50% 100%; }
+.reveal.in:not(.done)[data-fx="rubber"] { animation: fx-rubber .6s ease-out both; }
+.reveal.in:not(.done)[data-fx="wipe"] { animation: fx-wipe .55s ease-out both; }
+.reveal.in:not(.done)[data-fx="flip"] { animation: fx-flip .65s ease-out both; transform-origin: 50% 0; }
+.reveal.in:not(.done)[data-fx="stretch"] { animation: fx-stretch .6s ease-out both; transform-origin: var(--origin, 50% 50%); }
+/* Each entrance is only the settling tail of the effect: elements appear nearly in place and ease home */
+/* Headings: a light squash that settles */
 @keyframes fx-squeeze {
-  0% { transform: scale(1.3, 0); }
-  45% { transform: scale(.88, 1.18); }
-  65% { transform: scale(1.06, .92); }
-  82% { transform: scale(.98, 1.03); }
+  0% { transform: scale(1.03, .93); }
+  55% { transform: scale(.99, 1.015); }
   100% { transform: none; }
 }
-/* Buttons and stats: rubber band */
+/* Buttons and stats: a small rubber-band settle */
 @keyframes fx-rubber {
-  0% { transform: scale(0, .4); }
-  35% { transform: scale(1.25, .75); }
-  55% { transform: scale(.82, 1.18); }
-  72% { transform: scale(1.1, .92); }
-  88% { transform: scale(.97, 1.03); }
+  0% { transform: scale(1.05, .95); }
+  55% { transform: scale(.985, 1.015); }
   100% { transform: none; }
 }
-/* Body text: wiped up from behind a mask */
+/* Body text: the last part of a wipe */
 @keyframes fx-wipe {
-  0% { clip-path: inset(0 0 100% 0); transform: translateY(24px); }
+  0% { clip-path: inset(0 0 25% 0); transform: translateY(8px); }
   100% { clip-path: inset(0 0 0 0); transform: none; }
 }
-/* Cards: swing down like a hinged sign */
+/* Cards: the end of a hinge swing */
 @keyframes fx-flip {
-  0% { transform: perspective(1000px) rotateX(-90deg); }
-  55% { transform: perspective(1000px) rotateX(14deg); }
-  78% { transform: perspective(1000px) rotateX(-5deg); }
+  0% { transform: perspective(1000px) rotateX(-12deg); }
+  60% { transform: perspective(1000px) rotateX(2deg); }
   100% { transform: perspective(1000px) rotateX(0); }
 }
-/* Side cards: stretch out from their own edge */
+/* Side cards: the end of a stretch from their own edge */
 @keyframes fx-stretch {
-  0% { transform: scale(0, .85); }
-  55% { transform: scale(1.06, .97); }
-  75% { transform: scale(.98, 1.01); }
+  0% { transform: scale(.95, .99); }
+  60% { transform: scale(1.008, 1); }
   100% { transform: none; }
 }
