@@ -84,7 +84,6 @@ $$(".reveal").forEach((el, i) => {
     const cx = (r.left + r.right) / 2 / innerWidth;
     el.style.setProperty("--origin", cx < 0.45 ? "0% 50%" : cx > 0.55 ? "100% 50%" : "50% 50%");
   }
-  if (fx !== "none") el.style.animationDelay = `${(i % 4) * 40}ms`;
   io.observe(el);
 });
 $$(".tag").forEach(el => io.observe(el));
