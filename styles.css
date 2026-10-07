@@ -85,6 +85,12 @@ section { position: relative; padding: 64px 24px; text-align: center; }
 }
 .btn:hover { transform: translateY(3px); box-shadow: 0 4px 0 var(--ink); background: #f5bf4f; }
 .btn:active { transform: translateY(7px); box-shadow: 0 0 0 var(--ink); }
+/* Navy variant for the Resume button, so it stands out next to the yellow one */
+.btn-dark { background: var(--ink); color: var(--cream); box-shadow: 0 7px 0 var(--yellow); }
+.btn-dark:hover { background: var(--ink-2); box-shadow: 0 4px 0 var(--yellow); }
+.btn-dark:active { box-shadow: 0 0 0 var(--yellow); }
+.btn-arr { display: inline-block; margin-left: 4px; transition: transform .3s var(--bounce); }
+.btn:hover .btn-arr { transform: translate(3px, -3px); }
 .btn-sm { font-size: 14px; padding: 9px 16px; border-radius: 12px; box-shadow: 0 5px 0 var(--ink); white-space: nowrap; }
 .btn-sm:hover { box-shadow: 0 2px 0 var(--ink); }
 .link-arrow { font-family: var(--display); font-weight: 600; font-size: 18px; display: inline-flex; gap: 8px; border-bottom: 2px solid transparent; transition: border-color .2s; }
