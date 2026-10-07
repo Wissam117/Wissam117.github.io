@@ -42,7 +42,7 @@ function frame() {
 
   if (!reduced) {
     // Words drift constantly; scrolling speeds them up.
-    marquee += 0.35 + Math.abs(velocity) * 0.25;
+    marquee += 0.12 + Math.abs(velocity) * 0.06;
     rows.forEach(row => {
       const dir = Number(row.dataset.dir);
       const w = row.firstElementChild.offsetWidth;

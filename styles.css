@@ -158,9 +158,10 @@ section { position: relative; padding: 64px 24px; text-align: center; }
   position: absolute; top: 70px; left: 0; right: 0;
   font-family: var(--display); font-weight: 700;
   font-size: clamp(56px, 8vw, 104px); line-height: 1.05;
-  color: rgba(19, 32, 46, .055);
+  color: rgba(19, 32, 46, .03);
   pointer-events: none; user-select: none;
 }
+.hero-words .row + .row { margin-top: .35em; }
 .hero-words .row { display: flex; white-space: nowrap; will-change: transform; }
 .hero-words span { padding-right: .3em; }
 .hero-title {
