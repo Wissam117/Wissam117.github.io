@@ -36,7 +36,7 @@ a { color: inherit; text-decoration: none; }
 button { font: inherit; color: inherit; cursor: pointer; border: 0; background: none; }
 ::selection { background: var(--yellow); color: var(--ink); }
 
-section { position: relative; padding: 120px 24px; text-align: center; }
+section { position: relative; padding: 64px 24px; text-align: center; }
 .h2 {
   font-family: var(--display);
   font-weight: 600;
@@ -245,7 +245,7 @@ section { position: relative; padding: 120px 24px; text-align: center; }
   background:
     radial-gradient(rgba(255,255,255,.45) 1.2px, transparent 1.6px) 0 0 / 9px 9px,
     linear-gradient(to bottom, var(--sage), var(--steel));
-  padding-bottom: 160px; overflow-x: clip;
+  padding-bottom: 96px; overflow-x: clip;
 }
 .stats .tag { position: relative; left: -180px; }
 .stat-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 44px 32px; max-width: 1000px; margin: 40px auto 80px; }
@@ -371,14 +371,14 @@ section { position: relative; padding: 120px 24px; text-align: center; }
 .qa.open .a { grid-template-rows: 1fr; }
 
 /* ---------- CTA band ---------- */
-.cta-band { background: var(--yellow); padding: 110px 24px; overflow: hidden; }
+.cta-band { background: var(--yellow); padding: 88px 24px; overflow: hidden; }
 .cta-band h2 { font-family: var(--display); font-weight: 600; font-size: clamp(44px, 7vw, 96px); line-height: .95; max-width: 1000px; margin: 0 auto 36px; }
 .cta-band .muted { color: #7a5a14; }
 .cta-band .btn { background: var(--ink); color: var(--cream); box-shadow: 0 7px 0 #060c12; }
 .cta-band .btn:hover { box-shadow: 0 4px 0 #060c12; }
 
 /* ---------- Footer ---------- */
-.footer { background: var(--ink); color: var(--cream); padding: 100px clamp(24px, 6vw, 90px) 30px; overflow-x: clip; text-align: left; }
+.footer { background: var(--ink); color: var(--cream); padding: 80px clamp(24px, 6vw, 90px) 30px; overflow-x: clip; text-align: left; }
 .eyebrow { font-family: var(--display); text-transform: uppercase; letter-spacing: .08em; color: var(--yellow); margin: 0; }
 .foot-title { font-family: var(--display); font-weight: 600; font-size: clamp(48px, 8vw, 110px); line-height: .95; margin: 14px 0 60px; }
 .foot-title span { font-family: var(--serif); font-weight: 400; color: var(--sand); font-style: italic; }
@@ -395,7 +395,7 @@ section { position: relative; padding: 120px 24px; text-align: center; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
-  section { padding: 90px 16px; }
+  section { padding: 52px 16px; }
   .stage { margin: 56px -16px 6px; }
   .engine-grid, .work-grid, .proc-card, .vs-card { grid-template-columns: 1fr; }
   .stat-grid { grid-template-columns: 1fr 1fr; }
