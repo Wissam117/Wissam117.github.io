@@ -486,9 +486,10 @@ section { position: relative; padding: 120px 24px; text-align: center; }
 
 /* ---------- Hover sway: lean right, then left, continuously (tada-style, slower) ---------- */
 @keyframes sway { 25% { rotate: var(--sway, 5deg); } 75% { rotate: calc(var(--sway, 5deg) * -1); } }
-.swaying { animation: sway 2.4s ease-in-out infinite; }
-.tag.is-center.swaying, .hero-hi.is-center.swaying { animation: sway 2.4s ease-in-out infinite, bob 3.6s ease-in-out infinite; }
-.tile.swaying { animation: wave 3.2s ease-in-out infinite, sway 2.4s ease-in-out infinite; }
+.swaying { animation: sway 12s ease-in-out infinite; }
+/* keep the existing animations identical and append sway, so the entrance pop never replays */
+.tag.is-center.swaying, .hero-hi.is-center.swaying { animation: centerPop .9s var(--bounce) both, bob 3.6s ease-in-out 1s infinite, sway 12s ease-in-out infinite; }
+.tile.swaying { animation: wave 3.2s ease-in-out infinite, sway 12s ease-in-out infinite; }
 .btn, .menu-pill, .proc-tabs button, .xp-num, .xp-date { --sway: 4deg; }
 .portrait, .thumb-art, .pr-ico { --sway: 3deg; }
 .xp-item, .engine, .cert, .stat { --sway: 1.5deg; }
