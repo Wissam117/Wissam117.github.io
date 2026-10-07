@@ -1,936 +1,335 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>M.Wissam's Portfolio</title>
-    <link rel="icon" type="image/png" href="faviconn.png">
-    <link rel="shortcut icon" type="image/png" href="faviconn.png">
-    <link rel="apple-touch-icon" href="faviconn.png">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --primary: #6366f1;
-            --primary-dark: #4338ca;
-            --secondary: #ec4899;
-            --accent: #06b6d4;
-            --bg-dark: #0f172a;
-            --bg-card: #1e293b;
-            --text-primary: #f8fafc;
-            --text-secondary: #cbd5e1;
-            --text-muted: #64748b;
-        }
-
-        body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
-            background: var(--bg-dark);
-            color: var(--text-primary);
-            line-height: 1.6;
-            overflow-x: hidden;
-        }
-
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 2rem;
-        }
-
-        /* Navigation */
-        nav {
-            position: fixed;
-            top: 0;
-            width: 100%;
-            background: rgba(15, 23, 42, 0.8);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            transition: all 0.3s ease;
-        }
-
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1rem 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: 0.5px;
-            transition: all 0.3s ease;
-        }
-
-        .logo:hover {
-            letter-spacing: 1px;
-            filter: brightness(1.2);
-        }
-
-        .nav-links {
-            display: flex;
-            list-style: none;
-            gap: 2rem;
-        }
-
-        .nav-links a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            position: relative;
-        }
-
-        .nav-links a:hover {
-            color: var(--primary);
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 0;
-            height: 2px;
-            background: var(--primary);
-            transition: width 0.3s ease;
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
-        }
-
-        /* Hero Section */
-        .hero {
-            min-height: 100vh;
-            display: flex;
-            align-items: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero-bg {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(ellipse at top left, rgba(99, 102, 241, 0.08) 0%, transparent 50%);
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 2;
-            animation: fadeInUp 1s ease-out;
-            display: flex;
-            align-items: center;
-            gap: 3rem;
-        }
-
-        .hero-text {
-            flex: 1;
-        }
-
-        .hero-image {
-            flex-shrink: 0;
-        }
-
-        .profile-image {
-            width: 300px;
-            height: 300px;
-            border-radius: 50%;
-            object-fit: cover;
-            border: 4px solid var(--primary);
-            box-shadow: 0 10px 30px rgba(99, 102, 241, 0.3);
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-        }
-
-        .profile-image:hover {
-            transform: scale(1.05);
-            box-shadow: 0 15px 40px rgba(99, 102, 241, 0.4);
-        }
-
-        .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 800;
-            margin-bottom: 1rem;
-            background: linear-gradient(135deg, var(--text-primary) 0%, var(--primary) 50%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            letter-spacing: -0.5px;
-            line-height: 1.2;
-            animation: gradientShift 8s ease infinite;
-            background-size: 200% auto;
-        }
-
-        @keyframes gradientShift {
-            0%, 100% {
-                background-position: 0% center;
-            }
-            50% {
-                background-position: 100% center;
-            }
-        }
-
-        .name-highlight {
-            position: relative;
-            display: inline-block;
-            font-weight: 900;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 50%, var(--secondary) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-            background-size: 200% auto;
-            animation: gradientShift 8s ease infinite;
-            filter: drop-shadow(0 0 20px rgba(99, 102, 241, 0.3));
-        }
-
-        .name-highlight::after {
-            content: '';
-            position: absolute;
-            bottom: -5px;
-            left: 0;
-            width: 100%;
-            height: 3px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            border-radius: 2px;
-            opacity: 0.6;
-        }
-
-        .hero .subtitle {
-            font-size: clamp(1.2rem, 2.5vw, 1.8rem);
-            color: var(--primary);
-            margin-bottom: 1.5rem;
-            font-weight: 600;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            color: var(--text-secondary);
-            margin-bottom: 2rem;
-            max-width: 600px;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-        }
-
-        .btn {
-            padding: 1rem 2rem;
-            border: none;
-            border-radius: 0.5rem;
-            font-weight: 600;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-        }
-
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: 0 2px 8px rgba(99, 102, 241, 0.2);
-        }
-
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(99, 102, 241, 0.3);
-        }
-
-        .btn-secondary {
-            background: transparent;
-            color: var(--text-primary);
-            border: 2px solid var(--primary);
-        }
-
-        .btn-secondary:hover {
-            background: var(--primary);
-            transform: translateY(-2px);
-        }
-
-        /* Sections */
-        section {
-            padding: 5rem 0;
-            position: relative;
-        }
-
-        .section-title {
-            text-align: center;
-            margin-bottom: 3rem;
-        }
-
-        .section-title h2 {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-            position: relative;
-            display: inline-block;
-        }
-
-        .section-title h2::after {
-            content: '';
-            position: absolute;
-            bottom: -10px;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 60px;
-            height: 3px;
-            background: var(--primary);
-        }
-
-        .section-title p {
-            color: var(--text-secondary);
-            font-size: 1.1rem;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        /* About Section */
-        .about-content {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 4rem;
-            align-items: center;
-        }
-
-        .about-text {
-            font-size: 1.1rem;
-            color: var(--text-secondary);
-            line-height: 1.8;
-        }
-
-        .skills-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-            gap: 1rem;
-        }
-
-        .skill-item {
-            background: var(--bg-card);
-            padding: 1.5rem;
-            border-radius: 1rem;
-            text-align: center;
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(99, 102, 241, 0.1);
-        }
-
-        .skill-item:hover {
-            transform: translateY(-5px);
-            border-color: var(--primary);
-        }
-
-        .skill-item i {
-            font-size: 2rem;
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-
-        /* Projects Section */
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 2rem;
-        }
-
-        .project-card.last-project {
-            grid-column: 1 / -1;
-            max-width: 400px;
-            margin: 0 auto;
-        }
-
-        .project-card {
-            background: var(--bg-card);
-            border-radius: 1rem;
-            overflow: hidden;
-            transition: transform 0.3s ease;
-            border: 1px solid rgba(99, 102, 241, 0.1);
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            border-color: var(--primary);
-        }
-
-        .project-image {
-            height: 200px;
-            background: var(--bg-card);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 3rem;
-            color: var(--primary);
-            border-bottom: 2px solid rgba(99, 102, 241, 0.2);
-        }
-
-        .project-content {
-            padding: 2rem;
-        }
-
-        .project-content h3 {
-            font-size: 1.3rem;
-            margin-bottom: 1rem;
-            color: var(--text-primary);
-        }
-
-        .project-content p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            line-height: 1.6;
-        }
-
-        .project-tech {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 0.5rem;
-            margin-bottom: 1.5rem;
-        }
-
-        .tech-tag {
-            background: rgba(99, 102, 241, 0.1);
-            color: var(--primary);
-            padding: 0.25rem 0.75rem;
-            border-radius: 1rem;
-            font-size: 0.8rem;
-            font-weight: 500;
-        }
-
-        .project-links {
-            display: flex;
-            gap: 1rem;
-        }
-
-        .project-link {
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 600;
-            transition: color 0.3s ease;
-        }
-
-        .project-link:hover {
-            color: var(--secondary);
-        }
-
-        /* Contact Section */
-        .contact {
-            background: var(--bg-card);
-        }
-
-        .contact-content {
-            text-align: center;
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-links {
-            display: flex;
-            justify-content: center;
-            gap: 2rem;
-            margin-top: 2rem;
-            flex-wrap: wrap;
-        }
-
-        .contact-link {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.3s ease;
-            font-size: 1.1rem;
-        }
-
-        .contact-link:hover {
-            color: var(--primary);
-        }
-
-        .contact-link i {
-            font-size: 1.5rem;
-        }
-
-        /* Footer */
-        footer {
-            background: var(--bg-dark);
-            text-align: center;
-            padding: 2rem 0;
-            border-top: 1px solid rgba(99, 102, 241, 0.1);
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-            }
-
-            .hero-content {
-                flex-direction: column-reverse;
-                text-align: center;
-                gap: 2rem;
-            }
-
-            .profile-image {
-                width: 200px;
-                height: 200px;
-            }
-
-            .about-content {
-                grid-template-columns: 1fr;
-                gap: 2rem;
-            }
-
-            .skills-grid {
-                grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
-            }
-
-            .projects-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .contact-links {
-                flex-direction: column;
-                align-items: center;
-            }
-
-            .cta-buttons {
-                justify-content: center;
-            }
-        }
-
-        /* Smooth scrolling */
-        html {
-            scroll-behavior: smooth;
-        }
-
-        /* Custom scrollbar */
-        ::-webkit-scrollbar {
-            width: 8px;
-        }
-
-        ::-webkit-scrollbar-track {
-            background: var(--bg-dark);
-        }
-
-        ::-webkit-scrollbar-thumb {
-            background: var(--primary);
-            border-radius: 4px;
-        }
-
-        ::-webkit-scrollbar-thumb:hover {
-            background: var(--primary-dark);
-        }
-    </style>
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
-        rel="stylesheet">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Muhammad Wissam — Agentic AI Software Engineer</title>
+<meta name="description" content="Muhammad Wissam — Agentic AI Software Engineer in Islamabad. Agentic AI, RAG systems, Azure AI Foundry and MLOps.">
+<link rel="icon" type="image/png" href="faviconn.png">
+<link rel="apple-touch-icon" href="faviconn.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&family=DM+Serif+Display&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="styles.css">
 </head>
-
 <body>
-    <!-- Navigation -->
-    <nav>
-        <div class="nav-container">
-            <div class="logo">Muhammad Wissam</div>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
-        </div>
-    </nav>
 
-    <!-- Hero Section -->
-    <section id="home" class="hero">
-        <div class="hero-bg"></div>
-        <div class="container">
-            <div class="hero-content">
-                <div class="hero-text">
-                    <h1>Hi, I'm <span class="name-highlight">Muhammad Wissam</span></h1>
-                    <p class="subtitle">Full Stack Software Engineer | AI/ML Engineer</p>
-                    <p>Computer Science student at FAST NUCES with a passion for Artificial Intelligence and Software
-                        Development. I create innovative solutions that push the boundaries of technology, specializing
-                        in web applications, machine learning, and cloud computing.</p>
-                    <div class="cta-buttons">
-                        <a href="#projects" class="btn btn-primary">
-                            <i class="fas fa-code"></i>
-                            View My Work
-                        </a>
-                        <a href="#contact" class="btn btn-secondary">
-                            <i class="fas fa-envelope"></i>
-                            Get In Touch
-                        </a>
-                        <a href="https://github.com/Wissam117" class="btn btn-secondary" target="_blank">
-                            <i class="fab fa-github"></i>
-                            GitHub
-                        </a>
-                    </div>
-                </div>
-                <div class="hero-image">
-                    <img src="pfp.png" alt="Muhammad Wissam" class="profile-image">
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ============ HEADER ============ -->
+<header class="site-header" id="top">
+  <a href="#top" class="wordmark" aria-label="Muhammad Wissam — home">Wissam<span>.</span></a>
+  <button class="menu-pill" id="menuOpen" aria-expanded="false" aria-controls="menu">
+    Menu <span class="burger" aria-hidden="true"><i></i><i></i></span>
+  </button>
+</header>
 
-    <!-- About Section -->
-    <section id="about">
-        <div class="container">
-            <div class="section-title">
-                <h2>About Me</h2>
-                <p>Get to know more about who I am, what I do, and what skills I have</p>
-            </div>
-            <div class="about-content">
-                <div class="about-text">
-                    <p>I'm a passionate computer science student at FAST National University with expertise in
-                        full-stack development and AI/ML engineering. Currently pursuing my BS in Computer Science
-                        (graduating June 2025), I've developed strong problem-solving skills and effective communication
-                        abilities.</p>
+<!-- ============ FULLSCREEN MENU ============ -->
+<nav class="menu" id="menu" aria-hidden="true">
+  <button class="menu-pill menu-close" id="menuClose">Close <span class="x" aria-hidden="true">✕</span></button>
+  <ul>
+    <li><a href="#about"><span>01</span>About</a></li>
+    <li><a href="#experience"><span>02</span>Experience</a></li>
+    <li><a href="#projects"><span>03</span>Projects</a></li>
+    <li><a href="#journey"><span>04</span>Beyond code</a></li>
+    <li><a href="#contact"><span>05</span>Contact</a></li>
+  </ul>
+  <p class="menu-foot">Open to new opportunities — <a href="mailto:mwissam11@gmail.com">mwissam11@gmail.com</a></p>
+</nav>
 
-                    <p>My experience spans from building vegetation monitoring systems and home automation solutions to
-                        developing deep learning models for video generation and image super-resolution. I've also
-                        gained valuable industry experience as a Cybersecurity Intern at LMKR, where I deployed
-                        intrusion detection and network monitoring systems.</p>
+<main>
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="hero-words" aria-hidden="true">
+    <div class="row" data-dir="-1"><span>AGENTIC MEANINGFUL INTELLIGENT SCALABLE CURIOUS BOLD&nbsp;</span><span>AGENTIC MEANINGFUL INTELLIGENT SCALABLE CURIOUS BOLD&nbsp;</span></div>
+    <div class="row" data-dir="1"><span>RETRIEVE REASON ACT ITERATE DEPLOY SHIP&nbsp;</span><span>RETRIEVE REASON ACT ITERATE DEPLOY SHIP&nbsp;</span></div>
+    <div class="row" data-dir="-1"><span>AGENTS RAG AZURE AI FOUNDRY PYTHON C# MLOPS&nbsp;</span><span>AGENTS RAG AZURE AI FOUNDRY PYTHON C# MLOPS&nbsp;</span></div>
+  </div>
 
-                    <p>I'm always eager to take on new challenges and demonstrate creativity to push the boundaries of
-                        technology. Let's collaborate to bring innovative ideas to life!</p>
-                </div>
-                <div class="skills-grid">
-                    <div class="skill-item">
-                        <i class="fab fa-python"></i>
-                        <h4>Python</h4>
-                    </div>
-                    <div class="skill-item">
-                        <i class="fab fa-java"></i>
-                        <h4>Java</h4>
-                    </div>
-                    <div class="skill-item">
-                        <i class="fab fa-aws"></i>
-                        <h4>AWS Cloud</h4>
-                    </div>
-                    <div class="skill-item">
-                        <i class="fas fa-brain"></i>
-                        <h4>AI/ML</h4>
-                    </div>
-                    <div class="skill-item">
-                        <i class="fab fa-docker"></i>
-                        <h4>Docker</h4>
-                    </div>
-                    <div class="skill-item">
-                        <i class="fas fa-database"></i>
-                        <h4>Databases</h4>
-                    </div>
-                    <div class="skill-item">
-                        <i class="fab fa-css3-alt"></i>
-                        <h4>Tailwind</h4>
-                    </div>
-                    <div class="skill-item">
-                        <i class="fab fa-js-square"></i>
-                        <h4>JavaScript</h4>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+  <p class="hero-hi reveal">Hi, I'm Muhammad Wissam</p>
+  <h1 class="hero-title reveal">
+    Meaningful iteration <br class="br-lg">towards a meaningful <span class="muted">system</span>
+  </h1>
+  <p class="hero-sub reveal">Agentic AI Software Engineer &nbsp;|&nbsp; Islamabad</p>
+  <div class="hero-ctas reveal">
+    <a href="#experience" class="btn">See my work</a>
+    <a href="#contact" class="link-arrow">Get in touch <span>→</span></a>
+    <a href="assets/Muhammad_Wissam_CV.pdf" target="_blank" rel="noopener" class="link-arrow">Resume <span>↗</span></a>
+  </div>
 
-    <!-- Projects Section -->
-    <section id="projects">
-        <div class="container">
-            <div class="section-title">
-                <h2>My Projects</h2>
-                <p>Here are some of the projects I've worked on recently</p>
-            </div>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-leaf"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>TreeVerse - Vegetation Monitoring System (Final Year Project)</h3>
-                        <p>Collaborated a comprehensive vegetation monitoring web application using satellite imagery
-                            and geospatial data. Users can monitor deforestation and analyze vegetation across 4
-                            categories: crops, bushes, trees, and barren land.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Django REST</span>
-                            <span class="tech-tag">React</span>
-                            <span class="tech-tag">PostgreSQL</span>
-                            <span class="tech-tag">U-Net Model</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://TreeVerse.org" class="project-link" target="_blank">
-                                <i class="fas fa-external-link-alt"></i> Live
-                            </a>
-                        </div>
-                    </div>
-                </div>
+  <div class="stage" id="stage">
+    <div class="rings" aria-hidden="true"></div>
+    <div class="portrait" id="portrait">
+      <img src="assets/wissam.webp" alt="Portrait of Muhammad Wissam" width="900" height="842">
+    </div>
+    <span class="sticker s1" data-depth="0.12">Agentic AI</span>
+    <span class="sticker s2" data-depth="-0.1">RAG Systems</span>
+    <span class="sticker s3" data-depth="0.08">Azure AI Foundry</span>
+  </div>
+</section>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-home"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>HOMEE - Home Automation System</h3>
-                        <p>Full-stack home automation system that monitors electricity usage and automates IoT devices,
-                            making operations 3x more efficient with an intuitive JavaFX interface.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Java</span>
-                            <span class="tech-tag">JavaFX</span>
-                            <span class="tech-tag">MySQL</span>
-                            <span class="tech-tag">IoT</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/Wissam117/Homee" class="project-link" target="_blank">
-                                <i class="fab fa-github"></i> Source Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
+<!-- ============ ABOUT ============ -->
+<section class="skills" id="about">
+  <span class="tag tag-pink">About me</span>
+  <h2 class="h2 reveal">Execution is the real bottleneck.</h2>
+  <div class="about-copy reveal">
+    <p>I'm a Computer Science graduate of <b>FAST NUCES</b> with hands-on experience in <b>Agentic AI and RAG systems</b>, and I believe strongly in the agentic AI revolution in computing.</p>
+    <p>Working on different AI systems has taught me that the real bottleneck today is execution, so I'm willing to explore any niche possibility to get the best possible result. I spend my time on things that actually matter — my motto is <i>meaningful iteration towards a meaningful system</i>.</p>
+  </div>
+  <div class="engine-grid">
+    <article class="engine engine-lav reveal tilt">
+      <h3>Agentic AI &amp; RAG</h3>
+      <p>Agents, retrieval and AI services that solve real business problems.</p>
+      <div class="chips"><span>Microsoft Agentic Framework</span><span>Azure AI Foundry</span><span>MS Teams Agentic Toolkit</span><span>RAG Search</span><span>TensorFlow</span><span>ChromaDB</span></div>
+    </article>
+    <article class="engine engine-pink reveal tilt">
+      <h3>Engineering &amp; MLOps</h3>
+      <p>The code, data and pipelines that make AI production-ready.</p>
+      <div class="chips"><span>Python</span><span>C# (ASP.NET)</span><span>Elasticsearch</span><span>MongoDB</span><span>Docker</span><span>AWS Cloud</span><span>Jenkins</span><span>MLflow</span><span>Airflow</span><span>DVC</span><span>GitHub Actions</span></div>
+    </article>
+  </div>
+</section>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-video"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Video Generator - AI Video Prediction</h3>
-                        <p>Deep learning application made using Flask that generates videos by predicting the next 5
-                            frames using previous 10 frames with Vision Transformer architecture and other trained
-                            models.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">Flask</span>
-                            <span class="tech-tag">Vision Transformer</span>
-                            <span class="tech-tag">Deep Learning</span>
-                            <span class="tech-tag">Python</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/Wissam117/VideoGenerator-AIVideoPrediction" class="project-link"
-                                target="_blank">
-                                <i class="fab fa-github"></i> Source Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
+<!-- ============ EXPERIENCE ============ -->
+<section class="xp" id="experience">
+  <span class="tag tag-yellow">Experience</span>
+  <h2 class="h2 reveal">Where I've shipped.</h2>
+  <div class="xp-list">
+    <article class="xp-card xp-lav reveal">
+      <header class="xp-head">
+        <div><h3>Junior Software Engineer in AI</h3><p class="xp-org">Synergy-IT Pakistan</p></div>
+        <span class="xp-date">07/2025 — Present</span>
+      </header>
+      <div class="xp-items">
+        <div class="xp-item"><b class="xp-num">5×</b><div><h4>Agentic insurance claims</h4><p>Used the Microsoft Agentic Framework to build an intelligent claim-filing system, cutting submission from 25+ screens to around 5 — a 5× better customer experience that boosts retention.</p></div></div>
+        <div class="xp-item"><b class="xp-num">RAG</b><div><h4>AI CV processing pipeline</h4><p>Built and deployed a pipeline routing applications to the right databases, with RAG search over applicant CVs to surface the best candidates — on Azure AI Foundry and Azure Function Apps.</p></div></div>
+        <div class="xp-item"><b class="xp-num">Bot</b><div><h4>Microsoft Teams agentic bot</h4><p>Built and deployed a Teams bot that answers employee questions from company documents using the Agentic Toolkit.</p></div></div>
+      </div>
+    </article>
+    <article class="xp-card xp-mint reveal">
+      <header class="xp-head">
+        <div><h3>SWE Intern</h3><p class="xp-org">LMKR</p></div>
+        <span class="xp-date">07/2024 — 10/2024</span>
+      </header>
+      <div class="xp-items">
+        <div class="xp-item"><b class="xp-num">Flow</b><div><h4>NetFlow monitoring</h4><p>Deployed a NetFlow monitoring system with ElastiFlow, ingesting vectorised flow data through its Elasticsearch plugin.</p></div></div>
+        <div class="xp-item"><b class="xp-num">Ship</b><div><h4>Portable tooling</h4><p>Packaged tools with Docker and Docker Compose so they could move across different servers.</p></div></div>
+      </div>
+    </article>
+  </div>
+</section>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-image"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>PixelFocus - Image Super Resolution</h3>
-                        <p>Advanced image super-resolution application using hybrid ResNet-U-Net-ESPCN model to upscale
-                            images, achieving 2x image enhancement with high quality results.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">TensorFlow</span>
-                            <span class="tech-tag">PyTorch</span>
-                            <span class="tech-tag">ResNet</span>
-                            <span class="tech-tag">Computer Vision</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/Wissam117/PixelFocus-ImageSuperResolution" class="project-link"
-                                target="_blank">
-                                <i class="fab fa-github"></i> Source Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
+<!-- ============ PROJECTS ============ -->
+<section class="work" id="projects">
+  <span class="tag tag-yellow">Projects</span>
+  <h2 class="h2 reveal">Things I've built.</h2>
+  <p class="lede reveal">From geospatial deep learning to end-to-end ML pipelines.</p>
+  <div class="work-grid">
+    <article class="project featured reveal">
+      <div class="thumb t-mint"><div class="thumb-art"><b>TreeVerse</b><em>Final Year Project</em></div></div>
+      <div class="project-meta">
+        <div><h3>TreeVerse — Vegetation Monitoring</h3><p>A vegetation monitoring web app with interactive maps of satellite imagery and geospatial data. Users can monitor deforestation and analyse vegetation across four categories: crops, bushes, trees and barren land.</p>
+          <div class="ptags"><span>Django REST Framework</span><span>React</span><span>PostgreSQL</span><span>U-Net</span></div></div>
+        <a class="btn btn-sm" href="https://www.TreeVerse.qzz.io" target="_blank" rel="noopener">Live ↗</a>
+      </div>
+    </article>
+    <article class="project reveal">
+      <div class="thumb t-pink"><div class="thumb-art"><b>MLOps</b><em>End-to-End Pipeline</em></div></div>
+      <div class="project-meta">
+        <div><h3>MLOps — End-to-End Pipeline</h3><p>Full ML orchestration pipeline with version control for data and models.</p>
+          <div class="ptags"><span>Jenkins</span><span>MLflow</span><span>Airflow</span><span>DVC</span><span>GitHub Actions</span></div></div>
+        <a class="btn btn-sm" href="https://github.com/Wissam117/MLOps-EndtoEndPipeline" target="_blank" rel="noopener">Source ↗</a>
+      </div>
+    </article>
+    <article class="project reveal">
+      <div class="thumb t-peach"><div class="thumb-art"><b>PixelFocus</b><em>Super Resolution</em></div></div>
+      <div class="project-meta">
+        <div><h3>PixelFocus — Image Super Resolution</h3><p>Hybrid ResNet–U-Net–ESPCN model that upscales images to high resolution, achieving 2× upscaling.</p>
+          <div class="ptags"><span>TensorFlow</span><span>PyTorch</span><span>ResNet</span><span>Computer Vision</span></div></div>
+        <a class="btn btn-sm" href="https://github.com/Wissam117/PixelFocus-ImageSuperResolution" target="_blank" rel="noopener">Source ↗</a>
+      </div>
+    </article>
+    <article class="project reveal">
+      <div class="thumb t-lemon"><div class="thumb-art"><b>FLEX</b><em>University Management</em></div></div>
+      <div class="project-meta">
+        <div><h3>FLEX — University Management System</h3><p>A web app that streamlines administration tasks like attendance and grading.</p>
+          <div class="ptags"><span>ASP.NET MVC</span><span>MS SQL</span><span>C#</span></div></div>
+        <a class="btn btn-sm" href="https://github.com/aliabbasnagari/Flex" target="_blank" rel="noopener">Source ↗</a>
+      </div>
+    </article>
+    <article class="project reveal">
+      <div class="thumb t-lav"><div class="thumb-art"><b>Video</b><em>Generator</em></div></div>
+      <div class="project-meta">
+        <div><h3>Video Generator — Prediction-Based</h3><p>Locally deployed deep learning model that generates video by predicting the next 5 frames from the previous 10, using a Vision Transformer and other models.</p>
+          <div class="ptags"><span>Flask</span><span>Vision Transformer</span><span>Deep Learning</span><span>Python</span></div></div>
+        <a class="btn btn-sm" href="https://github.com/Wissam117/VideoGenerator-AIVideoPrediction" target="_blank" rel="noopener">Source ↗</a>
+      </div>
+    </article>
+    <article class="project featured reveal">
+      <div class="thumb t-yellow"><div class="thumb-art"><b>HOMEE</b><em>Home Automation</em></div></div>
+      <div class="project-meta">
+        <div><h3>HOMEE — Home Automation System</h3><p>Full-stack home automation system that monitors electricity usage and automates IoT devices, making operations 3× more efficient through a JavaFX interface.</p>
+          <div class="ptags"><span>Java</span><span>JavaFX</span><span>MySQL</span><span>IoT</span></div></div>
+        <a class="btn btn-sm" href="https://github.com/Wissam117/Homee" target="_blank" rel="noopener">Source ↗</a>
+      </div>
+    </article>
+  </div>
+  <a href="https://github.com/Wissam117" target="_blank" rel="noopener" class="link-arrow center">More on GitHub <span>→</span></a>
+</section>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>MLOps - End-to-End ML Pipeline</h3>
-                        <p>A Machine Learning project with full end to end implementation of a ML Orchestration
-                            pipeline, version control for data and models using Jenkins, MLFlow, Airflow, DVC and Github
-                            Actions.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">MLFlow</span>
-                            <span class="tech-tag">Airflow</span>
-                            <span class="tech-tag">Jenkins</span>
-                            <span class="tech-tag">DVC</span>
-                            <span class="tech-tag">GitHub Actions</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/Wissam117/MLOps-EndtoEndPipeline" class="project-link"
-                                target="_blank">
-                                <i class="fab fa-github"></i> Source Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
+<!-- ============ STATS ============ -->
+<section class="stats scallop">
+  <span class="tag tag-yellow tilt-l">Impact</span>
+  <h2 class="h2 reveal">By the numbers</h2>
+  <div class="stat-grid">
+    <div class="stat reveal"><div class="num"><span class="count" data-to="5">0</span>×</div><p>better claim-filing experience with agentic AI</p></div>
+    <div class="stat reveal"><div class="num">25+→<span class="count" data-to="5">0</span></div><p>screens per insurance claim</p></div>
+    <div class="stat reveal"><div class="num"><span class="count" data-to="100">0</span>%</div><p>merit scholarship for HSSC</p></div>
+    <div class="stat reveal"><div class="num"><span class="count" data-to="4">0</span></div><p>languages spoken</p></div>
+  </div>
+  <div class="wave-row" aria-label="Tech stack">
+    <span class="tile c1">Agents</span><span class="tile c2">RAG</span><span class="tile c3">Azure</span><span class="tile c4">Python</span><span class="tile c5">C#</span><span class="tile c1">Docker</span><span class="tile c2">AWS</span><span class="tile c3">Elastic</span><span class="tile c4">Mongo</span><span class="tile c5">Chroma</span><span class="tile c1">MLflow</span>
+  </div>
+</section>
 
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-university"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>FLEX - University Management System</h3>
-                        <p>Collaborated on a comprehensive university management web application that makes
-                            administration tasks like attendance and grading 200% faster with an intuitive interface.
-                        </p>
-                        <div class="project-tech">
-                            <span class="tech-tag">ASP.NET MVC</span>
-                            <span class="tech-tag">MS SQL</span>
-                            <span class="tech-tag">C#</span>
-                            <span class="tech-tag">Web Development</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://github.com/aliabbasnagari/Flex" class="project-link" target="_blank">
-                                <i class="fab fa-github"></i> Source Code
-                            </a>
-                        </div>
-                    </div>
-                </div>
+<!-- ============ PRINCIPLES ============ -->
+<section class="principles scallop-cream">
+  <span class="tag tag-mint">How I work</span>
+  <div class="pr-grid">
+    <div class="pr reveal">
+      <div class="pr-ico blob-mint"><svg viewBox="0 0 64 64"><path d="M14 40 L30 24 L38 32 L52 18" /><path d="M42 18 H52 V28"/></svg></div>
+      <h3>Execution first</h3>
+      <p>A great model is only as good as how it's delivered. I focus on getting execution right.</p>
+    </div>
+    <div class="pr reveal">
+      <div class="pr-ico blob-pink"><svg viewBox="0 0 64 64"><circle cx="28" cy="28" r="14"/><path d="M38 38 L50 50"/></svg></div>
+      <h3>Explore every niche</h3>
+      <p>I'll chase any unusual idea or tool if it gets us closer to the best possible result.</p>
+    </div>
+    <div class="pr reveal">
+      <div class="pr-ico blob-lav"><svg viewBox="0 0 64 64"><path d="M46 22 A18 18 0 1 0 50 36"/><path d="M50 14 V24 H40"/></svg></div>
+      <h3>Meaningful iteration</h3>
+      <p>Time goes to the things that actually matter — each iteration moves the system forward.</p>
+    </div>
+  </div>
+</section>
 
-                <div class="project-card last-project">
-                    <div class="project-image">
-                        <i class="fas fa-cloud"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3>Cloud Web Application Builder</h3>
-                        <p>Secure, highly available web application deployed on Amazon EC2 with load balancing,
-                            utilizing serverless architecture and AWS best practices.</p>
-                        <div class="project-tech">
-                            <span class="tech-tag">AWS EC2</span>
-                            <span class="tech-tag">AWS Lambda</span>
-                            <span class="tech-tag">API Gateway</span>
-                            <span class="tech-tag">DynamoDB</span>
-                        </div>
-                        <div class="project-links">
-                            <a href="https://www.credly.com/badges/1779320a-c6e7-499b-8098-ee170bacd4d8/public_url"
-                                class="project-link" target="_blank">
-                                <i class="fab fa-credly"></i> Credly Badge
-                            </a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ============ BEYOND CODE (tabbed) ============ -->
+<section class="process scallop" id="journey">
+  <span class="tag tag-lav">Beyond code</span>
+  <h2 class="h2 reveal">Education &amp; more</h2>
+  <div class="proc-card reveal">
+    <div class="proc-left">
+      <div class="proc-tabs" role="tablist">
+        <button role="tab" class="active" data-i="0">1</button>
+        <button role="tab" data-i="1">2</button>
+        <button role="tab" data-i="2">3</button>
+        <button role="tab" data-i="3">4</button>
+      </div>
+      <div class="proc-body">
+        <small class="proc-kicker" id="procKicker"></small>
+        <h3 id="procTitle"></h3>
+        <p id="procText"></p>
+        <div class="ptags" id="procTags"></div>
+      </div>
+      <div class="proc-bar"><i id="procBar"></i></div>
+    </div>
+    <div class="proc-right">
+      <svg class="burst" viewBox="0 0 200 200" aria-hidden="true"><polygon id="burstPoly"/></svg>
+      <div class="proc-ico" id="procIco"></div>
+    </div>
+  </div>
+</section>
 
-    <!-- Contact Section -->
-    <section id="contact" class="contact">
-        <div class="container">
-            <div class="section-title">
-                <h2>Get In Touch</h2>
-                <p>I'm always open to discussing new opportunities and interesting projects</p>
-            </div>
-            <div class="contact-content">
-                <p>Whether you have a project in mind, want to collaborate, or just want to say hello, I'd love to hear
-                    from you. As a graduating CS student eager to contribute to innovative projects, let's create
-                    something amazing together!</p>
-                <div class="contact-links">
-                    <a href="mailto:mwissam11@gmail.com" class="contact-link">
-                        <i class="fas fa-envelope"></i>
-                        mwissam11@gmail.com
-                    </a>
-                    <a href="tel:+923117583173" class="contact-link">
-                        <i class="fas fa-phone"></i>
-                        +92 311 7583173
-                    </a>
-                    <a href="https://github.com/Wissam117" class="contact-link" target="_blank">
-                        <i class="fab fa-github"></i>
-                        GitHub
-                    </a>
-                    <a href="#" class="contact-link" target="_blank">
-                        <i class="fab fa-linkedin"></i>
-                        LinkedIn
-                    </a>
-                </div>
-            </div>
-        </div>
-    </section>
+<!-- ============ CERTIFICATES ============ -->
+<section class="certs" id="certificates">
+  <span class="tag tag-mint">Certificates</span>
+  <h2 class="h2 reveal">AWS certified, three times over.</h2>
+  <div class="cert-grid">
+    <article class="cert reveal tilt">
+      <span class="cert-badge">AWS</span>
+      <h3>Cloud Foundations</h3>
+      <p>Cloud computing fundamentals with hands-on work across Amazon EC2, S3, RDS and IAM.</p>
+    </article>
+    <article class="cert reveal tilt">
+      <span class="cert-badge">AWS</span>
+      <h3>Cloud Data Pipeline Builder</h3>
+      <p>Built a scalable, automated data pipeline for transformation and storage with Amazon Redshift and S3.</p>
+    </article>
+    <article class="cert reveal tilt">
+      <span class="cert-badge">AWS</span>
+      <h3>Cloud Web Application Builder</h3>
+      <p>Deployed a secure, highly available serverless web app with AWS Lambda and DynamoDB.</p>
+      <a class="link-arrow" href="https://www.credly.com/badges/1779320a-c6e7-499b-8098-ee170bacd4d8/public_url" target="_blank" rel="noopener">View on Credly <span>↗</span></a>
+    </article>
+  </div>
+</section>
 
-    <!-- Footer -->
-    <footer>
-        <div class="container">
-            <p>&copy; 2025 Muhammad Wissam. All rights reserved. Built with ❤️ and lots of ☕</p>
-        </div>
-    </footer>
+<!-- ============ RANGE ============ -->
+<section class="versus">
+  <span class="tag tag-lav">Range</span>
+  <h2 class="h2 reveal">Both sides of the stack</h2>
+  <div class="vs-card reveal">
+    <div class="vs-col vs-them">
+      <h3>Agentic AI &amp; RAG</h3>
+      <ul>
+        <li><i>✓</i>Microsoft Agentic Framework</li>
+        <li><i>✓</i>Azure AI Foundry &amp; Function Apps</li>
+        <li><i>✓</i>RAG search with ChromaDB &amp; Elasticsearch</li>
+        <li><i>✓</i>MS Teams Agentic Toolkit</li>
+        <li><i>✓</i>U-Net, ResNet &amp; Vision Transformers</li>
+      </ul>
+    </div>
+    <svg class="vs-wave" viewBox="0 0 40 400" preserveAspectRatio="none" aria-hidden="true"><path d="M20 0 C40 25 0 50 20 75 S40 125 20 150 S0 200 20 225 S40 275 20 300 S0 350 20 375 S40 400 20 400 L40 400 L40 0Z"/></svg>
+    <div class="vs-badge" aria-hidden="true"><svg viewBox="0 0 100 100"><polygon points=""/></svg><span>+</span></div>
+    <div class="vs-col vs-me">
+      <h3>Engineering &amp; MLOps</h3>
+      <ul>
+        <li><i>✓</i>Python &amp; C# (ASP.NET)</li>
+        <li><i>✓</i>Django REST &amp; React web apps</li>
+        <li><i>✓</i>Docker, Docker Compose &amp; AWS</li>
+        <li><i>✓</i>MLflow, Airflow &amp; DVC pipelines</li>
+        <li><i>✓</i>CI/CD with Jenkins &amp; GitHub Actions</li>
+      </ul>
+    </div>
+  </div>
+</section>
 
-    <script>
-        // Smooth scrolling for navigation links
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
-                }
-            });
-        });
+<!-- ============ FAQ ============ -->
+<section class="faq" id="faq">
+  <span class="tag tag-pink">FAQs</span>
+  <h2 class="h2 reveal">Questions, answered.</h2>
+  <div class="faq-list">
+    <div class="qa"><button>What are you working on now?<i></i></button><div class="a"><div><p>I'm a Junior Software Engineer in AI at Synergy-IT Pakistan, building agentic systems, RAG search and AI pipelines on Azure AI Foundry and the Microsoft Agentic Framework.</p></div></div></div>
+    <div class="qa"><button>What do you specialise in?<i></i></button><div class="a"><div><p>Agentic AI and RAG systems — plus the engineering and MLOps needed to take them to production.</p></div></div></div>
+    <div class="qa"><button>Where did you study?<i></i></button><div class="a"><div><p>Bachelor's in Computer Science at FAST National University of Computer and Emerging Sciences, Islamabad (07/2021 – 06/2025).</p></div></div></div>
+    <div class="qa"><button>Where are you based?<i></i></button><div class="a"><div><p>Islamabad, Pakistan. I work in English, Urdu and Shina, with elementary Turkish.</p></div></div></div>
+    <div class="qa"><button>What's the best way to reach you?<i></i></button><div class="a"><div><p>Email <a href="mailto:mwissam11@gmail.com"><u>mwissam11@gmail.com</u></a>, call <a href="tel:+923117583173"><u>+92 311 7583173</u></a>, or message me on <a href="https://linkedin.com/in/wissam11" target="_blank" rel="noopener"><u>LinkedIn</u></a>.</p></div></div></div>
+  </div>
+</section>
 
-        // Navbar scroll effect
-        window.addEventListener('scroll', () => {
-            const nav = document.querySelector('nav');
-            if (window.scrollY > 100) {
-                nav.style.background = 'rgba(15, 23, 42, 0.95)';
-            } else {
-                nav.style.background = 'rgba(15, 23, 42, 0.8)';
-            }
-        });
+<!-- ============ CTA BAND ============ -->
+<section class="cta-band">
+  <h2 class="reveal">Building something agentic? <span class="muted">Let's make it meaningful.</span></h2>
+  <div class="hero-ctas reveal">
+    <a href="mailto:mwissam11@gmail.com" class="btn">Say hello</a>
+    <a href="assets/Muhammad_Wissam_CV.pdf" target="_blank" rel="noopener" class="link-arrow">Download my CV <span>↓</span></a>
+  </div>
+</section>
+</main>
 
-        // Intersection Observer for animations
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
+<!-- ============ FOOTER ============ -->
+<footer class="footer" id="contact">
+  <p class="eyebrow">Open to new opportunities and interesting projects</p>
+  <h2 class="foot-title">Let's build something <span>real</span></h2>
+  <div class="foot-grid">
+    <div><small>Email</small><a href="mailto:mwissam11@gmail.com" class="foot-mail">mwissam11@gmail.com</a><a href="tel:+923117583173">+92 311 7583173</a></div>
+    <div><small>Local time</small><p class="clock" id="clock">--:--</p><p class="clock-city" id="clockCity"></p></div>
+    <div><small>Navigate</small><a href="#about">About</a><a href="#experience">Experience</a><a href="#projects">Projects</a><a href="#certificates">Certificates</a></div>
+    <div><small>Elsewhere</small><a href="https://linkedin.com/in/wissam11" target="_blank" rel="noopener">LinkedIn ↗</a><a href="https://github.com/Wissam117" target="_blank" rel="noopener">GitHub ↗</a><a href="assets/Muhammad_Wissam_CV.pdf" target="_blank" rel="noopener">Resume ↗</a></div>
+  </div>
+  <div class="foot-giant" aria-hidden="true">Wissam<span>.</span></div>
+  <div class="foot-bottom"><span>© <span id="year"></span> Muhammad Wissam</span><a href="#top">Back to top ↑</a></div>
+</footer>
 
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.opacity = '1';
-                    entry.target.style.transform = 'translateY(0)';
-                }
-            });
-        }, observerOptions);
-
-        // Observe elements for animation
-        document.querySelectorAll('.project-card, .skill-item').forEach(el => {
-            el.style.opacity = '0';
-            el.style.transform = 'translateY(20px)';
-            el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
-            observer.observe(el);
-        });
-
-        // Add some interactive hover effects
-        document.querySelectorAll('.project-card').forEach(card => {
-            card.addEventListener('mouseenter', function () {
-                this.style.boxShadow = '0 20px 40px rgba(99, 102, 241, 0.2)';
-            });
-
-            card.addEventListener('mouseleave', function () {
-                this.style.boxShadow = 'none';
-            });
-        });
-    </script>
+<script src="main.js"></script>
 </body>
-
 </html>
