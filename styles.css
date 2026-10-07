@@ -295,8 +295,8 @@ section { position: relative; padding: 120px 24px; text-align: center; }
 .proc-tabs button.active { background: var(--ink); color: var(--cream); }
 .proc-body h3 { font-family: var(--display); font-weight: 600; font-size: clamp(48px, 6vw, 72px); margin: 0 0 10px; line-height: 1; }
 .proc-body p { max-width: 400px; margin: 0; }
-.proc-body.swap { animation: swapIn .6s var(--ease); }
-@keyframes swapIn { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: none; } }
+.proc-body.swap { animation: swapIn .6s ease-out; transform-origin: 50% 0; }
+@keyframes swapIn { 0% { transform: scale(1, 0); } 55% { transform: scale(.98, 1.06); } 78% { transform: scale(1.01, .98); } 100% { transform: none; } }
 .proc-bar { height: 4px; background: rgba(19, 32, 46, .1); border-radius: 4px; margin-top: 30px; max-width: 400px; overflow: hidden; }
 .proc-bar i { display: block; height: 100%; width: 0; background: var(--ink); }
 .proc-right { position: relative; aspect-ratio: 1; display: grid; place-items: center; }
@@ -304,7 +304,7 @@ section { position: relative; padding: 120px 24px; text-align: center; }
 .burst polygon { fill: var(--stone); }
 .proc-ico { position: relative; width: 46%; }
 .proc-ico svg { width: 100%; fill: none; stroke: var(--ink); stroke-width: 5; stroke-linecap: round; stroke-linejoin: round; animation: pop .7s var(--bounce); }
-@keyframes pop { from { transform: scale(.4) rotate(-20deg); opacity: 0; } }
+@keyframes pop { 0% { transform: scale(0) rotate(-30deg); } 60% { transform: scale(1.15, .9) rotate(6deg); } 80% { transform: scale(.95, 1.05) rotate(-2deg); } }
 @keyframes spin { to { transform: rotate(360deg); } }
 
 /* ---------- Versus ---------- */
@@ -391,9 +391,6 @@ section { position: relative; padding: 120px 24px; text-align: center; }
 .foot-giant { font-family: var(--serif); font-size: clamp(90px, 24vw, 380px); line-height: .8; letter-spacing: -.04em; margin: 70px 0 20px; text-align: center; color: var(--cream); opacity: .95; }
 .foot-bottom { display: flex; justify-content: space-between; font-size: 14px; opacity: .6; }
 
-/* ---------- Reveal ---------- */
-.reveal { opacity: 0; transform: translateY(40px); transition: opacity .9s var(--ease), transform .9s var(--ease); }
-.reveal.in { opacity: 1; transform: none; }
 
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
@@ -421,7 +418,6 @@ section { position: relative; padding: 120px 24px; text-align: center; }
 
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation: none !important; transition: none !important; }
-  .reveal { opacity: 1; transform: none; }
 }
 
 /* ---------- Content additions ---------- */
@@ -476,23 +472,65 @@ section { position: relative; padding: 120px 24px; text-align: center; }
 
 /* ---------- Centred labels & titles: upright, larger, animated ---------- */
 .tag.is-center { font-size: 17px; padding: 7px 18px; }
-.tag.is-center, .hero-hi.is-center { animation: centerPop .9s var(--bounce) both, bob 3.6s ease-in-out 1s infinite; }
 .tag.is-center:hover { transform: scale(1.1); }
-@keyframes centerPop { from { scale: .5; opacity: 0; } to { scale: 1; opacity: 1; } }
+@keyframes tagPop { 0% { scale: 0 .4; } 40% { scale: 1.25 .8; } 60% { scale: .88 1.12; } 80% { scale: 1.05 .96; } 100% { scale: 1; } }
 @keyframes bob { 0%, 100% { translate: 0 0; } 50% { translate: 0 -5px; } }
-.h2.reveal, .hero-title.reveal, .cta-band h2.reveal, .foot-title {
-  transform: translateY(40px) scale(.92); letter-spacing: .03em;
-  transition: opacity .9s var(--ease), transform 1.1s var(--ease), letter-spacing 1.2s var(--ease);
-}
-.h2.reveal.in, .hero-title.reveal.in, .cta-band h2.reveal.in { transform: none; letter-spacing: -.015em; }
-.foot-title { transform: none; letter-spacing: -.01em; }
 
 /* ---------- Hover sway: lean right, then left, continuously (tada-style, slower) ---------- */
 @keyframes sway { 25% { rotate: var(--sway, 5deg); } 75% { rotate: calc(var(--sway, 5deg) * -1); } }
 .swaying { animation: sway 12s ease-in-out infinite; }
-/* keep the existing animations identical and append sway, so the entrance pop never replays */
-.tag.is-center.swaying, .hero-hi.is-center.swaying { animation: centerPop .9s var(--bounce) both, bob 3.6s ease-in-out 1s infinite, sway 12s ease-in-out infinite; }
+/* Tags pop in when scrolled into view; hover appends sway after the existing animations so the pop never replays */
+.tag.in, .hero-hi.in { animation: tagPop .9s ease-out both; }
+.tag.in.is-center, .hero-hi.in.is-center { animation: tagPop .9s ease-out both, bob 3.6s ease-in-out 1s infinite; }
+.tag.in.swaying, .hero-hi.in.swaying { animation: tagPop .9s ease-out both, sway 12s ease-in-out infinite; }
+.tag.in.is-center.swaying, .hero-hi.in.is-center.swaying { animation: tagPop .9s ease-out both, bob 3.6s ease-in-out 1s infinite, sway 12s ease-in-out infinite; }
 .tile.swaying { animation: wave 3.2s ease-in-out infinite, sway 12s ease-in-out infinite; }
 .btn, .menu-pill, .proc-tabs button, .xp-num, .xp-date { --sway: 4deg; }
 .portrait, .thumb-art, .pr-ico { --sway: 3deg; }
 .xp-item, .engine, .cert, .stat { --sway: 1.5deg; }
+
+/* ---------- Reveal: squash, stretch, flip and wipe instead of fading ---------- */
+@media (prefers-reduced-motion: no-preference) {
+  .reveal:not(.in), .tag:not(.in), .hero-hi:not(.in) { visibility: hidden; }
+}
+.reveal.in:not(.done)[data-fx="squeeze"] { animation: fx-squeeze 1s ease-out both; transform-origin: 50% 100%; }
+.reveal.in:not(.done)[data-fx="rubber"] { animation: fx-rubber .9s ease-out both; }
+.reveal.in:not(.done)[data-fx="wipe"] { animation: fx-wipe .8s cubic-bezier(.2, .8, .2, 1) both; }
+.reveal.in:not(.done)[data-fx="flip"] { animation: fx-flip 1s ease-out both; transform-origin: 50% 0; }
+.reveal.in:not(.done)[data-fx="stretch"] { animation: fx-stretch .9s ease-out both; transform-origin: var(--origin, 50% 50%); }
+/* Headings: squash up from the baseline, then wobble into shape */
+@keyframes fx-squeeze {
+  0% { transform: scale(1.3, 0); }
+  45% { transform: scale(.88, 1.18); }
+  65% { transform: scale(1.06, .92); }
+  82% { transform: scale(.98, 1.03); }
+  100% { transform: none; }
+}
+/* Buttons and stats: rubber band */
+@keyframes fx-rubber {
+  0% { transform: scale(0, .4); }
+  35% { transform: scale(1.25, .75); }
+  55% { transform: scale(.82, 1.18); }
+  72% { transform: scale(1.1, .92); }
+  88% { transform: scale(.97, 1.03); }
+  100% { transform: none; }
+}
+/* Body text: wiped up from behind a mask */
+@keyframes fx-wipe {
+  0% { clip-path: inset(0 0 100% 0); transform: translateY(24px); }
+  100% { clip-path: inset(0 0 0 0); transform: none; }
+}
+/* Cards: swing down like a hinged sign */
+@keyframes fx-flip {
+  0% { transform: perspective(1000px) rotateX(-90deg); }
+  55% { transform: perspective(1000px) rotateX(14deg); }
+  78% { transform: perspective(1000px) rotateX(-5deg); }
+  100% { transform: perspective(1000px) rotateX(0); }
+}
+/* Side cards: stretch out from their own edge */
+@keyframes fx-stretch {
+  0% { transform: scale(0, .85); }
+  55% { transform: scale(1.06, .97); }
+  75% { transform: scale(.98, 1.01); }
+  100% { transform: none; }
+}

@@ -58,7 +58,16 @@ function frame() {
 }
 requestAnimationFrame(frame);
 
-// ---- Reveal on scroll + count-up ----
+// ---- Reveal on scroll (each kind of element gets its own entrance, no fades) + count-up ----
+const FX = [
+  [".hero-hi", "none"],                  // pops in with the tags
+  [".h2, .hero-title, h2.reveal", "squeeze"],
+  [".hero-ctas, .stat", "rubber"],
+  [".hero-sub, .lede, .about-copy", "wipe"],
+  [".pr", "squeeze"],
+  [".cert, .xp-card, .proc-card, .vs-card, .project.featured", "flip"],
+  [".engine, .project", "stretch"],
+];
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
     if (!e.isIntersecting) return;
@@ -67,7 +76,25 @@ const io = new IntersectionObserver(entries => {
     io.unobserve(e.target);
   });
 }, { threshold: 0.15 });
-$$(".reveal").forEach((el, i) => { el.style.transitionDelay = `${(i % 4) * 70}ms`; io.observe(el); });
+$$(".reveal").forEach((el, i) => {
+  const fx = (FX.find(([sel]) => el.matches(sel)) || [, "wipe"])[1];
+  el.dataset.fx = fx;
+  if (fx === "stretch") {
+    const r = el.getBoundingClientRect();
+    const cx = (r.left + r.right) / 2 / innerWidth;
+    el.style.setProperty("--origin", cx < 0.45 ? "0% 50%" : cx > 0.55 ? "100% 50%" : "50% 50%");
+  }
+  if (fx !== "none") el.style.animationDelay = `${(i % 4) * 90}ms`;
+  io.observe(el);
+});
+$$(".tag").forEach(el => io.observe(el));
+// Once an entrance finishes, drop it so hover/tilt transforms work normally again
+document.addEventListener("animationend", e => {
+  const el = e.target;
+  if (!e.animationName.startsWith("fx-") || !el.classList.contains("reveal")) return;
+  el.classList.add("done");
+  el.style.animationDelay = "";
+});
 
 function countUp(el) {
   const to = Number(el.dataset.to);
