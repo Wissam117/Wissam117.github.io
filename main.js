@@ -2,9 +2,9 @@
 const HOME = { city: "Islamabad", tz: "Asia/Karachi" };
 const STEPS = [
   { k: "Education · 2021 – 2025", t: "FAST NUCES", d: "Bachelor's in Computer Science at FAST National University of Computer and Emerging Sciences, Islamabad.", tags: ["Software Engineering", "Generative AI", "Data Structures", "MLOps", "Operating Systems", "Computer Networks"], icon: '<svg viewBox="0 0 100 100"><path d="M10 40 L50 22 L90 40 L50 58Z"/><path d="M26 48 V66 C26 72 74 72 74 66 V48 M90 40 V62"/></svg>' },
-  { k: "Achievement", t: "100% Merit Scholarship", d: "Awarded a full merit scholarship for HSSC at Punjab College of Science, Blue Area, Islamabad.", tags: [], icon: '<svg viewBox="0 0 100 100"><circle cx="50" cy="40" r="22"/><path d="M38 58 L32 88 L50 78 L68 88 L62 58"/><path d="M42 40 L48 46 L60 34"/></svg>' },
+  { k: "Achievement", t: "Merit Scholarship", n: 100, suffix: "%", nl: "scholarship for HSSC", d: "Awarded a full merit scholarship for HSSC at Punjab College of Science, Blue Area, Islamabad.", tags: [], icon: '<svg viewBox="0 0 100 100"><circle cx="50" cy="40" r="22"/><path d="M38 58 L32 88 L50 78 L68 88 L62 58"/><path d="M42 40 L48 46 L60 34"/></svg>' },
   { k: "Organisation · 2022 – 2025", t: "FAST Literary Society", d: "Started as PR Manager, then served as Information Secretary.", tags: [], icon: '<svg viewBox="0 0 100 100"><path d="M18 22 H62 C70 22 74 26 74 34 V80 H30 C22 80 18 76 18 68Z"/><path d="M30 38 H62 M30 50 H62 M30 62 H50"/><path d="M74 34 H84 V70"/></svg>' },
-  { k: "Languages & interests", t: "Four languages", d: "English (full professional), Urdu and Shina (native), Turkish (elementary). Outside work: language learning, geopolitics and hiking.", tags: ["Language Learning", "Geopolitics", "Hiking"], icon: '<svg viewBox="0 0 100 100"><path d="M10 82 L38 34 L52 56 L64 40 L90 82Z"/><path d="M32 44 L38 34 L44 44"/><circle cx="74" cy="22" r="8"/></svg>' },
+  { k: "Languages & interests", t: "Languages & hobbies", n: 4, nl: "languages spoken", d: "English (full professional), Urdu and Shina (native), Turkish (elementary). Outside work: language learning, geopolitics and hiking.", tags: ["Language Learning", "Geopolitics", "Hiking"], icon: '<svg viewBox="0 0 100 100"><path d="M10 82 L38 34 L52 56 L64 40 L90 82Z"/><path d="M32 44 L38 34 L44 44"/><circle cx="74" cy="22" r="8"/></svg>' },
 ];
 
 const reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
@@ -147,6 +147,14 @@ function showStep(i) {
   tabs.forEach((b, j) => { b.classList.toggle("active", j === i); b.setAttribute("aria-selected", String(j === i)); });
   $("#procKicker").textContent = STEPS[i].k;
   $("#procTitle").textContent = STEPS[i].t;
+  // Achievement and languages steps carry their headline number
+  const st = STEPS[i];
+  $("#procStat").hidden = st.n == null;
+  if (st.n != null) {
+    $("#procNum").innerHTML = `<span class="count" data-to="${st.n}">0</span>${st.suffix || ""}`;
+    $("#procNumLabel").textContent = st.nl;
+    countUp($("#procNum .count"));
+  }
   $("#procText").textContent = STEPS[i].d;
   $("#procTags").innerHTML = STEPS[i].tags.map(t => `<span>${t}</span>`).join("");
   $("#procIco").innerHTML = STEPS[i].icon;
