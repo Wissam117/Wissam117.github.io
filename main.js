@@ -26,9 +26,8 @@ $("#menuClose").addEventListener("click", () => setMenu(false));
 $$("#menu a").forEach(a => a.addEventListener("click", () => setMenu(false)));
 addEventListener("keydown", e => { if (e.key === "Escape") setMenu(false); });
 
-// ---- Scroll-driven effects: header, marquee words, portrait zoom, sticker parallax ----
+// ---- Scroll-driven effects: header, marquee words, sticker parallax ----
 const rows = $$(".hero-words .row");
-const portrait = $("#portrait");
 const stage = $("#stage");
 const stickers = $$(".sticker");
 let marquee = 0;
@@ -52,9 +51,8 @@ function frame() {
     });
 
     const r = stage.getBoundingClientRect();
-    const p = Math.min(Math.max(1 - r.top / innerHeight, 0), 1.2);
-    portrait.style.setProperty("--s", (0.82 + p * 0.22).toFixed(3));
-    stickers.forEach(s => { s.style.transform = `translateY(${(r.top * Number(s.dataset.depth)).toFixed(1)}px)`; });
+    const off = r.top + r.height / 2 - innerHeight / 2;
+    stickers.forEach(s => { s.style.transform = `translateY(${(off * Number(s.dataset.depth)).toFixed(1)}px)`; });
   }
   requestAnimationFrame(frame);
 }
@@ -177,3 +175,23 @@ let leanTimer;
 addEventListener("resize", () => { clearTimeout(leanTimer); leanTimer = setTimeout(applyLean, 150); });
 document.fonts.ready.then(applyLean);
 applyLean();
+
+// ---- Hover sway: while hovered, slowly lean right then left; ease back to the resting lean on leave ----
+const SWAY = [
+  [".tag, .hero-hi, .sticker, .cert-badge, .chips span, .ptags span, .btn, .menu-pill, .tile, .xp-item, .xp-num, .xp-date, .portrait, .engine, .cert, .stat, .proc-tabs button"],
+  [".project", ".thumb-art"],
+  [".pr", ".pr-ico"],
+];
+if (!reduced) {
+  SWAY.forEach(([trigger, target]) => $$(trigger).forEach(t => {
+    const el = target ? $(target, t) : t;
+    if (!el) return;
+    t.addEventListener("pointerenter", () => el.classList.add("swaying"));
+    t.addEventListener("pointerleave", () => {
+      const from = getComputedStyle(el).rotate;
+      el.classList.remove("swaying");
+      const to = getComputedStyle(el).rotate;
+      if (from !== to) el.animate([{ rotate: from === "none" ? "0deg" : from }, { rotate: to === "none" ? "0deg" : to }], { duration: 500, easing: "cubic-bezier(.34,1.56,.64,1)" });
+    });
+  }));
+}
