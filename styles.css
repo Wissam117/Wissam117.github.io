@@ -164,16 +164,19 @@ section { position: relative; padding: 120px 24px; text-align: center; }
   line-height: .9; letter-spacing: -.025em;
   margin: 18px auto 20px; max-width: 1150px;
 }
-.hero-sub { position: relative; font-family: var(--display); font-size: clamp(18px, 2vw, 22px); font-weight: 500; margin: 0; }
+.hero-sub { position: relative; z-index: 2; display: inline-block; background: var(--cream); padding: 4px 16px; border-radius: 999px; box-shadow: 0 0 18px 10px var(--cream); font-family: var(--display); font-size: clamp(18px, 2vw, 22px); font-weight: 500; margin: 0; }
 .hero-ctas { position: relative; display: flex; justify-content: center; align-items: center; gap: 28px; flex-wrap: wrap; }
 
 /* Photo: square crop in a circle with object-fit: cover (same trick as the original site) */
-.stage { --ps: clamp(210px, 34vh, 340px); position: relative; display: grid; place-items: center; padding: 26px 0; margin: 4px -24px 22px; }
+.stage { --ps: clamp(210px, 34vh, 340px); --cy: calc(30px + var(--ps) / 2); position: relative; display: grid; place-items: center; padding: 30px 0; margin: 44px -24px 22px; }
+/* Rings start below the tagline and fade in from the top, so they never sit behind text */
 .rings {
-  position: absolute; inset: -30% 0;
-  background: repeating-radial-gradient(circle at 50% 50%, #c9d6e2 0, var(--cream) 26px, #c9d6e2 32px);
-  -webkit-mask-image: radial-gradient(circle at 50% 50%, #000 calc(var(--ps) * .5), transparent calc(var(--ps) * 1.25));
-          mask-image: radial-gradient(circle at 50% 50%, #000 calc(var(--ps) * .5), transparent calc(var(--ps) * 1.25));
+  position: absolute; top: 0; left: 0; right: 0; bottom: -30%;
+  background: repeating-radial-gradient(circle at 50% var(--cy), #c9d6e2 0, var(--cream) 26px, #c9d6e2 32px);
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 calc(var(--ps) * .45)), radial-gradient(circle at 50% var(--cy), #000 calc(var(--ps) * .5), transparent calc(var(--ps) * 1.25));
+  -webkit-mask-composite: source-in;
+          mask-image: linear-gradient(to bottom, transparent 0, #000 calc(var(--ps) * .45)), radial-gradient(circle at 50% var(--cy), #000 calc(var(--ps) * .5), transparent calc(var(--ps) * 1.25));
+          mask-composite: intersect;
   opacity: .8; pointer-events: none;
 }
 .portrait {
@@ -392,7 +395,7 @@ section { position: relative; padding: 120px 24px; text-align: center; }
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
   section { padding: 90px 16px; }
-  .stage { margin: 4px -16px 22px; }
+  .stage { margin: 32px -16px 22px; }
   .engine-grid, .work-grid, .proc-card, .vs-card { grid-template-columns: 1fr; }
   .stat-grid { grid-template-columns: 1fr 1fr; }
   .pr-grid { grid-template-columns: 1fr; }
