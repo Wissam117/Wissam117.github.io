@@ -147,7 +147,7 @@ section { position: relative; padding: 120px 24px; text-align: center; }
 .menu-foot a { text-decoration: underline; }
 
 /* ---------- Hero ---------- */
-.hero { padding-top: 110px; padding-bottom: 70px; overflow-x: clip; }
+.hero { padding-top: 110px; padding-bottom: 0; overflow-x: clip; }
 .hero-words {
   position: absolute; top: 70px; left: 0; right: 0;
   font-family: var(--display); font-weight: 700;
@@ -168,14 +168,14 @@ section { position: relative; padding: 120px 24px; text-align: center; }
 .hero-ctas { position: relative; display: flex; justify-content: center; align-items: center; gap: 28px; flex-wrap: wrap; }
 
 /* Photo: square crop in a circle with object-fit: cover (same trick as the original site) */
-.stage { --ps: clamp(210px, 34vh, 340px); --cy: calc(30px + var(--ps) / 2); position: relative; display: grid; place-items: center; padding: 30px 0; margin: 44px -24px 22px; }
+.stage { --ps: clamp(210px, 34vh, 340px); --cy: calc(30px + var(--ps) / 2); position: relative; display: grid; place-items: center; padding: 30px 0 22px; margin: 72px -24px 6px; }
 /* Rings start below the tagline and fade in from the top, so they never sit behind text */
 .rings {
-  position: absolute; top: 0; left: 0; right: 0; bottom: -30%;
+  position: absolute; inset: 0;
   background: repeating-radial-gradient(circle at 50% var(--cy), #c9d6e2 0, var(--cream) 26px, #c9d6e2 32px);
-  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 calc(var(--ps) * .45)), radial-gradient(circle at 50% var(--cy), #000 calc(var(--ps) * .5), transparent calc(var(--ps) * 1.25));
+  -webkit-mask-image: linear-gradient(to bottom, transparent 0, #000 calc(var(--ps) * .45), #000 calc(100% - var(--ps) * .3), transparent 100%), radial-gradient(circle at 50% var(--cy), #000 calc(var(--ps) * .5), transparent calc(var(--ps) * 1.25));
   -webkit-mask-composite: source-in;
-          mask-image: linear-gradient(to bottom, transparent 0, #000 calc(var(--ps) * .45)), radial-gradient(circle at 50% var(--cy), #000 calc(var(--ps) * .5), transparent calc(var(--ps) * 1.25));
+          mask-image: linear-gradient(to bottom, transparent 0, #000 calc(var(--ps) * .45), #000 calc(100% - var(--ps) * .3), transparent 100%), radial-gradient(circle at 50% var(--cy), #000 calc(var(--ps) * .5), transparent calc(var(--ps) * 1.25));
           mask-composite: intersect;
   opacity: .8; pointer-events: none;
 }
@@ -201,6 +201,9 @@ section { position: relative; padding: 120px 24px; text-align: center; }
 .s1 { right: calc(50% + var(--ps) / 2 + 18px); top: 22%; background: var(--steel); --mag: 8deg; }
 .s2 { left: calc(50% + var(--ps) / 2 + 18px); top: 16%; background: var(--sage); --mag: 6deg; }
 .s3 { left: calc(50% + var(--ps) / 2 - 6px); bottom: 14%; background: var(--yellow); --mag: 5deg; }
+
+/* Next section follows the hero closely */
+.hero + section { padding-top: 64px; }
 
 /* ---------- Skills ---------- */
 .engine-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1180px; margin: 0 auto; text-align: left; }
@@ -395,7 +398,7 @@ section { position: relative; padding: 120px 24px; text-align: center; }
 /* ---------- Responsive ---------- */
 @media (max-width: 860px) {
   section { padding: 90px 16px; }
-  .stage { margin: 32px -16px 22px; }
+  .stage { margin: 56px -16px 6px; }
   .engine-grid, .work-grid, .proc-card, .vs-card { grid-template-columns: 1fr; }
   .stat-grid { grid-template-columns: 1fr 1fr; }
   .pr-grid { grid-template-columns: 1fr; }
